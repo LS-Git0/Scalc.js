@@ -48,7 +48,7 @@
   box-sizing: border-box;
 }
 
-#calculator .buttons {
+#calculator ul {
   padding: 0;
   width: 423px;
   margin: auto;
@@ -56,7 +56,7 @@
   list-style: none;
 }
 
-#calculator .buttons li {
+#calculator ul li {
   display: inline;
   float: left;
   padding: 0px;
@@ -64,11 +64,11 @@
   margin-bottom: 10px;
 }
 
-#calculator .buttons li:nth-child(4n) {
+#calculator ul li:nth-child(4n) {
   margin-right: 0;
 }
 
-#calculator .buttons a {
+#calculator ul a {
   display: block;
   width: 95px;
   height: 68px;
@@ -99,11 +99,11 @@
   outline: 0;
 }
 
-#calculator .buttons a:hover {
+#calculator ul a:hover {
   background: #3F3F3F;
 }
 
-#calculator .buttons a:active {
+#calculator ul a:active {
   box-shadow: inset rgba(0,0,0,0.5) 0px 2px 8px;
   background-image: -moz-linear-gradient(top, #2f2f2f 0%, #363636 100%);
   background-image: -webkit-linear-gradient(top, #2f2f2f 0%, #363636 100%);
