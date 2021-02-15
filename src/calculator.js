@@ -29,7 +29,7 @@ function calculator() {
                 char = "";
             } else if (key === 13) { // Enter
                 $('#calculator input[type="hidden"]').val(eval($('#calculator input[type="hidden"]').val()));
-                $("#calculator .screen").html($('#calculator input[type="hidden"]').val());
+                $("#calculator .screen").html(eval($('#calculator input[type="hidden"]').val()));
             }
         });
         $("#calculator a").click(function (e) {
@@ -38,7 +38,7 @@ function calculator() {
             var s = a;
             if (a === "=") { // Enter
                 $('#calculator input[type="hidden"]').val(eval($('#calculator input[type="hidden"]').val()));
-                $("#calculator .screen").html($('#calculator input[type="hidden"]').val());
+                $("#calculator .screen").html(eval($('#calculator input[type="hidden"]').val()));
             } else if (a === "c") { // Esc
                 $('#calculator input[type="hidden"]').val("");
                 $("#calculator .screen").html("");
