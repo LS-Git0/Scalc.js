@@ -65,8 +65,8 @@ function calculator() {
                 $('#calculator input[type="hidden"]').val("");
                 $("#calculator .screen").html("");
             } else if (key === 8) { // Tab
-                char = $("#calculator .screen").html();
-                char = char.subchar(0, char.length - 1);
+                var char = $("#calculator .screen").html();
+                char = char.substr(0, char.length - 1);
                 $("#calculator .screen").html(char);
                 $('#calculator input[type="hidden"]').val(char);
             }
