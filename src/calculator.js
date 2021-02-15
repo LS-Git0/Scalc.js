@@ -16,7 +16,7 @@ function calculator() {
         $(this).keypress(function (e) {
             var char = "";
             var key  = (e.which) ? e.which : e.keyCode;
-            char = charing.fromCharCode(key);
+            char = String.fromCharCode(key);
             $('#calculator a[href="' + char + '"]').css(shadow);
             char = char.replace(/[^0-9\/\*\-\+\.\%]/g, ""); // Allowed characters 0-9 / * - + . %
             if (char) {
