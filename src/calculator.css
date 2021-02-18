@@ -68,7 +68,7 @@
   margin-right: 0;
 }
 
-#calculator ul a {
+#calculator a {
   display: block;
   width: 95px;
   height: 68px;
@@ -99,50 +99,26 @@
   outline: 0;
 }
 
-#calculator ul a:hover {
+#calculator a:hover {
   background: #3F3F3F;
 }
 
-#calculator ul a:active,
-#calculator .shadow {
+#calculator .button-pressed {
   box-shadow: inset rgba(0,0,0,0.5) 0px 2px 8px;
   background-image: -moz-linear-gradient(top, #2f2f2f 0%, #363636 100%);
   background-image: -webkit-linear-gradient(top, #2f2f2f 0%, #363636 100%);
   background-image: linear-gradient(top, #2f2f2f 0%, #363636 100%);
 }
 
-#calculator .tall {
+#calculator .equal {
   height: 151px !important;
 }
 
-#calculator .wide {
+#calculator .zero {
   width: 205px !important;
 }
 
-#calculator .shift {
+#calculator .dot,
+#calculator .zero {
   margin-top: -78px;
-}
-
-#calculator .ctrls {
-  list-style: none;
-  margin: 5px 0 0 20px;
-  padding: 0;
-  position: absolute;
-}
-
-#calculator .ctrls li {
-  float: left;
-  display: inline;
-}
-
-#calculator .ctrls li a {
-  display: block;
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  border-radius: 100%;
-  box-shadow: rgba(255,255,255,0.3) 0px 0px 1px, inset rgba(0,0,0,1) 0px 1px 2px 1px;
-  background-image: -moz-radial-gradient( 9px -4px, #FFF 0px, #fff 2px, rgba(255,255,255,0) 4px), -moz-linear-gradient(bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
-  background-image: -webkit-radial-gradient( 9px -4px, #FFF 0px, #fff 2px, rgba(255,255,255,0) 4px), -webkit-linear-gradient(bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
-  background-image: radial-gradient( 9px -4px, #FFF 0px, #fff 2px, rgba(255,255,255,0) 4px), linear-gradient(bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
 }
