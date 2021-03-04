@@ -37,4 +37,4 @@ scalc();
 </html>
 ```
 
-![ScreenShot](https://raw.githubusercontent.com/Sambrax/Calculator/main/screenshot.png)
+![ScreenShot](https://raw.githubusercontent.com/Sambrax/Calculator/main/img/screenshot.png)
