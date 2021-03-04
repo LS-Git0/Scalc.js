@@ -1,4 +1,5 @@
-# Scalc.js - Calculator
+![alt text](https://raw.githubusercontent.com/Sambrax/Calculator/main/img/scalc.png)
+# Calculator
 
 ```html
 <!DOCTYPE html>
