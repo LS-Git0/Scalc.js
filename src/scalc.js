@@ -16,7 +16,7 @@ function scalc(options = {}) {
     | });
     | -------------------------------------------------------------------------
     */
-    window.onload = function () {
+    var init = function () {
         var calculator = document.getElementById("calculator");
         /*
         | ---------------------------------------------------------------------
@@ -77,7 +77,7 @@ function scalc(options = {}) {
                         divid.style.top  = ypos + "px";
                     },
                     startMoving : function (divid, evt) {
-                        container.style.cursor = "url('cursor/move.svg'),auto";
+                        addClass(container, "cursor-move");
                         evt = evt || window.event;
                         var posX     = evt.clientX,
                             posY     = evt.clientY,
@@ -106,19 +106,28 @@ function scalc(options = {}) {
                     },
                     stopMoving : function () {
                         var a = document.createElement("script");
-                        container.style.cursor = "default";
+                        removeClass(container, "cursor-move");
                         document.onmousemove = function () {};
                     },
                     init : function () {
+                        var element = calculator.querySelector("#draggable");
+                        var resize_scrollbar_screen = function () {
+                            var width  = document.documentElement.scrollWidth;
+                            var height = document.documentElement.scrollHeight;
+                            container.style.width  = width  + "px";
+                            container.style.height = height + "px";
+                        };
                         $draggable.resize();
                         window.onresize = function () {
                             $draggable.resize();
                         };
-                        var element = calculator.querySelector("#draggable");
+                        window.onscroll = function () {
+                            resize_scrollbar_screen();
+                        };
                         element.onmousedown = function (e) {
-                            // Proportional to the size of the #window div
+                            resize_scrollbar_screen();
                             this.style.width  = "480px";
-                            this.style.height = "560px";
+                            this.style.height = "562px";
                             $draggable.startMoving(this, e);
                         };
                         document.onmouseup = function () {
@@ -277,4 +286,11 @@ function scalc(options = {}) {
             }
         }
     };
+    try {
+        init();
+    } catch (e) {
+        window.onload = function () {
+            init();
+        };
+    }
 }
