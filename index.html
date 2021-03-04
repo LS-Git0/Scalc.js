@@ -6,31 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>Calculator</title>
+    <title>Scalc.js - Calculator</title>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="dist/calculator.min.js"></script>
-    <link href="dist/calculator.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <script src="dist/scalc.min.js"></script>
+    <link href="dist/scalc.min.css" rel="stylesheet">
+
+    <style>
+    body {
+      background-image: url("img/bg.jpg");
+      color: white;
+    }
+    pre {
+      margin: 50px;
+    }
+    .logo {
+      border: 0;
+      width: 200px;
+      height: 53px;
+    }
+    </style>
 
 </head>
 <body>
 
 <script>
-/*
-| ---------------------------
-| Calculator options
-| ---------------------------
-|
-| calculator({
-|   draggable: false
-| });
-| ---------------------------
-*/
-calculator();
+scalc();
 </script>
 
 <div id="calculator"></div>
+
+<pre>
+
+  <img src="img/scalc.png" class="logo">
+  Calculator
+
+  <h1>Usage</h1>
+  <h2>
+  &lt;script src="dist/scalc.min.js">&lt;/script&gt;
+  &lt;link href="dist/scalc.min.css" rel="stylesheet"&gt;
+
+  &lt;script&gt;
+  scalc();
+  &lt;/script&gt;
+
+  &lt;div id="calculator"&gt;&lt;/div&gt;
+  </h2>
+  <h1>Options</h1>
+  <h2>
+  &lt;script&gt;
+  scalc({
+      draggable: false
+  });
+  &lt;/script&gt;
+
+  </h2>
+
+</pre>
 
 </body>
 </html>
