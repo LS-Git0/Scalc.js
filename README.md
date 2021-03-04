@@ -1,4 +1,4 @@
-# Calculator
+# Scalc.js - Calculator
 
 ```html
 <!DOCTYPE html>
@@ -9,12 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>Calculator</title>
+    <title>Scalc.js</title>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="dist/calculator.min.js"></script>
-    <link href="dist/calculator.min.css" rel="stylesheet">
+    <script src="dist/scalc.min.js"></script>
+    <link href="dist/scalc.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -25,12 +23,12 @@
 | Calculator options
 | ---------------------------
 |
-| calculator({
+| scalc({
 |   draggable: false
 | });
 | ---------------------------
 */
-calculator();
+scalc();
 </script>
 
 <div id="calculator"></div>
