@@ -6,6 +6,8 @@
   max-width: 100%;
   overflow: hidden;
   overflow-x: hidden;
+  z-index: 999999;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 #calculator #draggable {
@@ -145,4 +147,21 @@
 #calculator .dot,
 #calculator .zero {
   margin-top: -78px;
+}
+
+#calculator #topbar {
+  width: 424px;
+  height: 35px;
+  margin: 0 auto 30px;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#calculator #topbar a {
+  letter-spacing: 0 !important;
+  color: #636363 !important;
+  padding: 0 !important;
+  width: 35px !important;
+  height: 35px !important;
 }
