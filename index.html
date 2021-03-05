@@ -17,10 +17,15 @@
     <style>
     body {
       background-image: url("img/bg.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: white;
     }
     pre {
       margin: 50px;
+    }
+    a {
+      color: yellow;
     }
     .logo {
       border: 0;
@@ -32,17 +37,11 @@
 </head>
 <body>
 
-<script>
-scalc();
-</script>
-
 <div id="calculator"></div>
 
 <pre>
-
   <img src="img/scalc.png" class="logo">
   Calculator
-
   <h1>Usage</h1>
   <h2>
   &lt;script src="dist/scalc.min.js">&lt;/script&gt;
@@ -58,12 +57,16 @@ scalc();
   <h2>
   &lt;script&gt;
   scalc({
-      draggable: false
+      modal: true       // Default false
+      draggable: false  // Default true
   });
   &lt;/script&gt;
 
+  <a href="#" onclick="javascript:scalc(); return false">Demo - scalc();</a>
+  <a href="#" onclick="javascript:scalc({draggable: false}); return false">Demo - scalc({draggable: false});</a>
+  <a href="#" onclick="javascript:scalc({modal: true}); return false">Demo - scalc({modal: true})</a>
+  <a href="#" onclick="javascript:scalc({modal: true, draggable: false}); return false">Demo - scalc({modal: true, draggable: false})</a>
   </h2>
-
 </pre>
 
 </body>
