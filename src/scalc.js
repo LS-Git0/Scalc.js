@@ -27,6 +27,9 @@ function scalc(options = {}) {
           <div id="container">
             <div id="draggable">
               <div id="window">
+                <div id="topbar">
+                  <a href="Close">X</a>
+                </div>
                 <div id="display"></div>
                 <ul>
                   <li><a href="Escape">C</a></li>
@@ -56,7 +59,9 @@ function scalc(options = {}) {
         | Options
         | ---------------------------------------------------------------------
         */
-        if (options.draggable !== false) {
+        options.modal     = (options.modal === true) ? true : false;
+        options.draggable = (options.draggable === false) ? false : true;
+        if (options.modal === true) {
             var $draggable = function () {
                 var container = calculator.querySelector("#container");
                 return {
@@ -125,13 +130,18 @@ function scalc(options = {}) {
                             resize_scrollbar_screen();
                         };
                         element.onmousedown = function (e) {
+                            var win_div = calculator.querySelector("#window");
                             resize_scrollbar_screen();
                             this.style.width  = "480px";
-                            this.style.height = "562px";
-                            $draggable.startMoving(this, e);
+                            this.style.height = win_div.offsetHeight + "px";
+                            if (options.draggable === true) {
+                                $draggable.startMoving(this, e);
+                            }
                         };
                         document.onmouseup = function () {
-                            $draggable.stopMoving();
+                            if (options.draggable === true) {
+                                $draggable.stopMoving();
+                            }
                         };
                     }
                 }
@@ -227,6 +237,8 @@ function scalc(options = {}) {
                     total();
                 } else if (key === "Escape") {
                     reset();
+                } else if (key === "Close") {
+                    container.remove();
                 } else {
                     insert(key);
                 }
