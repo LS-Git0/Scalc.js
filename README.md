@@ -25,7 +25,8 @@
 | ---------------------------
 |
 | scalc({
-|   draggable: false
+    modal: true       // Default false
+|   draggable: false  // Default true
 | });
 | ---------------------------
 */
