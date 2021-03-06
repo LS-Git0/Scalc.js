@@ -23,37 +23,31 @@ function scalc(options = {}) {
         | Calculator structure
         | ---------------------------------------------------------------------
         */
-        calculator.innerHTML = `
-          <div id="container">
-            <div id="draggable">
-              <div id="window">
-                <div id="topbar">
-                  <a href="Close">X</a>
-                </div>
-                <div id="display"></div>
-                <ul>
-                  <li><a href="Escape">C</a></li>
-                  <li><a href="%">%</a></li>
-                  <li><a href="/">/</a></li>
-                  <li><a href="*">*</a></li>
-                  <li><a href="7">7</a></li>
-                  <li><a href="8">8</a></li>
-                  <li><a href="9">9</a></li>
-                  <li><a href="-">-</a></li>
-                  <li><a href="4">4</a></li>
-                  <li><a href="5">5</a></li>
-                  <li><a href="6">6</a></li>
-                  <li><a href="+">+</a></li>
-                  <li><a href="1">1</a></li>
-                  <li><a href="2">2</a></li>
-                  <li><a href="3">3</a></li>
-                  <li><a href="Enter" class="equal">=</a></li>
-                  <li><a href="0" class="zero">0</a></li>
-                  <li><a href="." class="dot">.</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>`;
+        var html = `
+            <div id="window">
+              <div id="topbar"><a href="Close">X</a></div>
+              <div id="display"></div>
+              <ul>
+                <li><a href="Escape">C</a></li>
+                <li><a href="%">%</a></li>
+                <li><a href="/">/</a></li>
+                <li><a href="*">*</a></li>
+                <li><a href="7">7</a></li>
+                <li><a href="8">8</a></li>
+                <li><a href="9">9</a></li>
+                <li><a href="-">-</a></li>
+                <li><a href="4">4</a></li>
+                <li><a href="5">5</a></li>
+                <li><a href="6">6</a></li>
+                <li><a href="+">+</a></li>
+                <li><a href="1">1</a></li>
+                <li><a href="2">2</a></li>
+                <li><a href="3">3</a></li>
+                <li><a href="Enter" class="equal">=</a></li>
+                <li><a href="0" class="zero">0</a></li>
+                <li><a href="." class="dot">.</a></li>
+              </ul>
+            </div>`;
         /*
         | ---------------------------------------------------------------------
         | Options
@@ -62,8 +56,11 @@ function scalc(options = {}) {
         options.modal     = (options.modal === true) ? true : false;
         options.draggable = (options.draggable === false) ? false : true;
         if (options.modal === true) {
+            calculator.innerHTML = '<div id="container"><div id="draggable">' +
+                                    html + '</div></div>';
             var $draggable = function () {
                 var container = calculator.querySelector("#container");
+                var topbar    = calculator.querySelector("#topbar");
                 return {
                     resize : function () {
                         var width = window.innerWidth ||
@@ -82,7 +79,7 @@ function scalc(options = {}) {
                         divid.style.top  = ypos + "px";
                     },
                     startMoving : function (divid, evt) {
-                        addClass(container, "cursor-move");
+                        addClass(topbar, "cursor-move");
                         evt = evt || window.event;
                         var posX     = evt.clientX,
                             posY     = evt.clientY,
@@ -111,7 +108,7 @@ function scalc(options = {}) {
                     },
                     stopMoving : function () {
                         var a = document.createElement("script");
-                        removeClass(container, "cursor-move");
+                        removeClass(topbar, "cursor-move");
                         document.onmousemove = function () {};
                     },
                     init : function () {
@@ -129,13 +126,13 @@ function scalc(options = {}) {
                         window.onscroll = function () {
                             resize_scrollbar_screen();
                         };
-                        element.onmousedown = function (e) {
+                        topbar.onmousedown = function (e) {
                             var win_div = calculator.querySelector("#window");
                             resize_scrollbar_screen();
-                            this.style.width  = "480px";
-                            this.style.height = win_div.offsetHeight + "px";
+                            element.style.width  = "480px";
+                            element.style.height = win_div.offsetHeight + "px";
                             if (options.draggable === true) {
-                                $draggable.startMoving(this, e);
+                                $draggable.startMoving(element);
                             }
                         };
                         document.onmouseup = function () {
@@ -147,6 +144,46 @@ function scalc(options = {}) {
                 }
             }();
             $draggable.init();
+        } else {
+            calculator.innerHTML = html;
+            if (options.draggable === true) {
+                (function (elmnt) {
+                    var pos1   = 0,
+                        pos2   = 0,
+                        pos3   = 0,
+                        pos4   = 0,
+                        topbar = calculator.querySelector("#topbar");
+                    topbar.onmousedown = dragMouseDown;
+                    function dragMouseDown(e) {
+                        addClass(topbar, "cursor-move");
+                        e = e || window.event;
+                        e.preventDefault();
+                        // get the mouse cursor position at startup:
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        document.onmouseup = closeDragElement;
+                        // call a function whenever the cursor moves:
+                        document.onmousemove = elementDrag;
+                    }
+                    function elementDrag(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        // calculate the new cursor position:
+                        pos1 = pos3 - e.clientX;
+                        pos2 = pos4 - e.clientY;
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        // set the element's new position:
+                        elmnt.style.top  = (elmnt.offsetTop  - pos2) + "px";
+                        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                    }
+                    function closeDragElement() {
+                        removeClass(topbar, "cursor-move");
+                        document.onmouseup   = null;
+                        document.onmousemove = null;
+                    }
+                })(calculator.querySelector("#window"));
+            }
         }
         /*
         | ---------------------------------------------------------------------
@@ -238,7 +275,7 @@ function scalc(options = {}) {
                 } else if (key === "Escape") {
                     reset();
                 } else if (key === "Close") {
-                    container.remove();
+                    calculator.innerHTML = "";
                 } else {
                     insert(key);
                 }
