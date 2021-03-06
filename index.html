@@ -20,9 +20,20 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
       color: white;
+      font-size: 16px;
     }
     pre {
+      text-align: center;
       margin: 50px;
+    }
+    pre div {
+      display: inline-block;
+      background-color: #323232;
+      padding: 50px;
+      text-align: left;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
     }
     a {
       color: yellow;
@@ -42,19 +53,19 @@
 <pre>
   <img src="img/scalc.png" class="logo">
   Calculator
-  <h1>Usage</h1>
-  <h2>
+
+  <div>
+  <strong>Usage</strong>
+
   &lt;script src="dist/scalc.min.js">&lt;/script&gt;
   &lt;link href="dist/scalc.min.css" rel="stylesheet"&gt;
 
-  &lt;script&gt;
-  scalc();
-  &lt;/script&gt;
+  &lt;script&gt;scalc();&lt;/script&gt;
 
   &lt;div id="calculator"&gt;&lt;/div&gt;
-  </h2>
-  <h1>Options</h1>
-  <h2>
+
+  <strong>Options</strong>
+
   &lt;script&gt;
   scalc({
       modal: true       // Default false
@@ -66,7 +77,7 @@
   <a href="#" onclick="javascript:scalc({draggable: false}); return false">Demo - scalc({draggable: false});</a>
   <a href="#" onclick="javascript:scalc({modal: true}); return false">Demo - scalc({modal: true})</a>
   <a href="#" onclick="javascript:scalc({modal: true, draggable: false}); return false">Demo - scalc({modal: true, draggable: false})</a>
-  </h2>
+  </div>
 </pre>
 
 </body>
