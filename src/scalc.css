@@ -43,6 +43,8 @@
   -ms-user-select: none;
   -khtml-user-select: none;     
   user-select: none;
+  outline: 0;
+  z-index: 9999;
 }
 
 #calculator #display {
@@ -151,11 +153,12 @@
 
 #calculator #topbar {
   width: 424px;
-  height: 35px;
   margin: 0 auto 30px;
-  padding: 0;
+  padding: 5px;
   display: flex;
   justify-content: flex-end;
+  border-radius: 7px;
+  background-color: #232323;
 }
 
 #calculator #topbar a {
@@ -164,4 +167,8 @@
   width: 35px !important;
   height: 35px !important;
   color: #636363 !important;
+}
+
+#calculator .disable {
+  opacity: 0.9;
 }
