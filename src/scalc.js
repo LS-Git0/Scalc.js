@@ -24,7 +24,7 @@ function scalc(options = {}) {
         | ---------------------------------------------------------------------
         */
         var html = `
-            <div id="window">
+            <div id="window" tabindex="0">
               <div id="topbar"><a href="Close">X</a></div>
               <div id="display"></div>
               <ul>
@@ -58,6 +58,11 @@ function scalc(options = {}) {
         if (options.modal === true) {
             calculator.innerHTML = '<div id="container"><div id="draggable">' +
                                     html + '</div></div>';
+            var _window = calculator.querySelector("#window");
+            var width   = ((window.innerWidth - _window.offsetWidth) / 2);
+            var height  = ((window.innerHeight - _window.offsetHeight) / 2);
+            calculator.querySelector("#draggable").style.left = width  + "px";
+            calculator.querySelector("#draggable").style.top  = height + "px";
             var $draggable = function () {
                 var container = calculator.querySelector("#container");
                 var topbar    = calculator.querySelector("#topbar");
@@ -127,10 +132,10 @@ function scalc(options = {}) {
                             resize_scrollbar_screen();
                         };
                         topbar.onmousedown = function (e) {
-                            var win_div = calculator.querySelector("#window");
+                            var _window = calculator.querySelector("#window");
                             resize_scrollbar_screen();
                             element.style.width  = "480px";
-                            element.style.height = win_div.offsetHeight + "px";
+                            element.style.height = _window.offsetHeight + "px";
                             if (options.draggable === true) {
                                 $draggable.startMoving(element);
                             }
@@ -146,6 +151,11 @@ function scalc(options = {}) {
             $draggable.init();
         } else {
             calculator.innerHTML = html;
+            var _window = calculator.querySelector("#window");
+            var width   = ((window.innerWidth - _window.offsetWidth) / 2);
+            var height  = ((window.innerHeight - _window.offsetHeight) / 2);
+            _window.style.left = width  + "px";
+            _window.style.top  = height + "px";
             if (options.draggable === true) {
                 (function (elmnt) {
                     var pos1   = 0,
@@ -182,7 +192,7 @@ function scalc(options = {}) {
                         document.onmouseup   = null;
                         document.onmousemove = null;
                     }
-                })(calculator.querySelector("#window"));
+                })(_window);
             }
         }
         /*
@@ -262,6 +272,25 @@ function scalc(options = {}) {
         };
         /*
         | ---------------------------------------------------------------------
+        | Document events
+        | ---------------------------------------------------------------------
+        */
+        var load    = new Event("load"),
+            _window = calculator.querySelector("#window");
+        _window.onload = function (e) {
+            this.focus();
+        };
+        _window.dispatchEvent(load);
+        _window.onfocus = function (e) {
+            e.preventDefault();
+            removeClass(this, "disable");
+        };
+        _window.onblur = function (e) {
+            e.preventDefault();
+            addClass(this, "disable");
+        };
+        /*
+        | ---------------------------------------------------------------------
         | Mouse events
         | ---------------------------------------------------------------------
         */
@@ -289,6 +318,14 @@ function scalc(options = {}) {
                 removeClass(this, css_class);
             };
         }
+        calculator.querySelector("ul").onclick = function (e) {
+            e.preventDefault();
+            _window.focus();
+        };
+        calculator.querySelector("#topbar").onclick = function (e) {
+            e.preventDefault();
+            _window.focus();
+        };
         /*
         | ---------------------------------------------------------------------
         | Keyboard events
@@ -301,7 +338,7 @@ function scalc(options = {}) {
                 return String.fromCharCode(e.which || e.keyCode);
             }
         };
-        document.body.onkeypress = function (e) {
+        _window.onkeypress = function (e) {
             e.preventDefault();
             // Allowed characters 0-9 / * - + . %
             var char = $key(e).replace(/[^0-9\/\*\-\+\.\%]/g, "");
@@ -309,7 +346,7 @@ function scalc(options = {}) {
                 insert(char);
             }
         };
-        document.body.onkeydown = function (e) {
+        _window.onkeydown = function (e) {
             var key = $key(e);
             var el  = button(key);
             if (el) {
@@ -321,7 +358,7 @@ function scalc(options = {}) {
                 reset();
             }
         };
-        document.body.onkeyup = function (e) {
+        _window.onkeyup = function (e) {
             var key = $key(e);
             var el  = button(key);
             if (el) {
