@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "font_regular";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../font/woff2/OpenSans-Regular.woff2") format("woff2"),
+  url("../font/woff/OpenSans-Regular.woff") format("woff"),
+  url("../font/ttf/OpenSans-Regular.ttf") format("truetype"),
+  url("../font/svg/OpenSans-Regular.svg#OpenSansRegular") format("svg");
+}
+
 #calculator #container {
   position: absolute;
   top: 0;
@@ -54,6 +64,7 @@
   padding: 15px 20px;
   color: #c0c0c0;
   text-align: right;
+  font-family: "font_regular";
   font-size: 3em;
   letter-spacing: 3px;
   overflow: hidden;
@@ -98,9 +109,8 @@
   height: 68px;
   padding: 18px 0 12px;
   color: #c0c0c0 !important;
-  font-family: sans, Arial, sans-serif;
+  font-family: "font_regular";
   font-size: 1.6em;
-  font-weight: 500;
   letter-spacing: -2px;
   background: #2f2f2f;
   border: #000 1px solid;
@@ -162,8 +172,7 @@
 }
 
 #calculator #topbar a {
-  letter-spacing: 0 !important;
-  padding: 0 !important;
+  padding: 0 0 36px 0 !important;
   width: 35px !important;
   height: 35px !important;
   color: #636363 !important;
