@@ -168,7 +168,7 @@
   display: flex;
   justify-content: flex-end;
   border-radius: 7px;
-  background-color: #232323;
+  background-image: url("../img/bg_topbar.jpg");
 }
 
 #calculator #topbar a {
