@@ -1,8 +1,8 @@
 /**
  * Scalc.js - Basic calculator
  *
- * @author     Sambrax
- * @copyright  2021 Sambrax
+ * @author     Renexo
+ * @copyright  2021 Renexo
  * @license    MIT License
  */
 function scalc(options = {}) {
