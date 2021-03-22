@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/Renexo-git/Calculator/main/img/scalc.png)
+![alt text](https://raw.githubusercontent.com/Renexo-git/Scalc.js/master/img/scalc.png)
 # Calculator
 
 ```html
@@ -39,4 +39,4 @@ scalc();
 </html>
 ```
 
-![ScreenShot](https://raw.githubusercontent.com/Renexo-git/Calculator/main/img/screenshot.png)
+![ScreenShot](https://raw.githubusercontent.com/Renexo-git/Scalc.js/master/img/screenshot.png)
