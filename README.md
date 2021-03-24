@@ -5,7 +5,7 @@
 
 npm i scalc.js
 
-Or downloading directly from GitHub.
+Or downloading directly from GitHub [here: ](https://github.com/Renexo-git/Scalc.js/archive/refs/heads/master.zip)
 
 ```html
 <!DOCTYPE html>
