@@ -1,5 +1,11 @@
 ![alt text](https://raw.githubusercontent.com/Renexo-git/Scalc.js/master/img/scalc.png)
-# Calculator
+### Calculator
+
+# Install
+
+npm i scalc.js
+
+Or downloading directly from GitHub.
 
 ```html
 <!DOCTYPE html>
