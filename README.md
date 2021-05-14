@@ -18,23 +18,23 @@ Or downloading directly from GitHub [here: ](https://github.com/Renexo-git/Scalc
 
     <title>Scalc.js</title>
 
-    <script src="dist/scalc.min.js"></script>
-    <link href="dist/scalc.min.css" rel="stylesheet">
+    <link href="/path/to/scalc.min.css" rel="stylesheet">
+    <script src="/path/to/scalc.min.js"></script>
 
 </head>
 <body>
 
 <script>
 /*
-| ---------------------------
+| ------------------------------------
 | Calculator options
-| ---------------------------
+| ------------------------------------
 |
 | scalc({
-    modal: true       // Default false
+|   modal: true       // Default false
 |   draggable: false  // Default true
 | });
-| ---------------------------
+| ------------------------------------
 */
 scalc();
 </script>
