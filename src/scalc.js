@@ -5,53 +5,56 @@
  * @copyright  2021 Renexo
  * @license    MIT License
  */
+/*
+| ------------------------------------------------------------------------------
+| Calculator options
+| ------------------------------------------------------------------------------
+|
+| scalc({
+|   modal: true       // Default false
+|   draggable: false  // Default true
+| });
+| ------------------------------------------------------------------------------
+*/
 function scalc(options = {}) {
-    /*
-    | -------------------------------------------------------------------------
-    | Calculator options
-    | -------------------------------------------------------------------------
-    |
-    | calculator({
-    |   draggable: false
-    | });
-    | -------------------------------------------------------------------------
-    */
     var init = function () {
         var calculator = document.getElementById("calculator");
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Calculator structure
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var html = `
             <div id="window" tabindex="0">
-              <div id="topbar"><a href="Close">X</a></div>
+              <div id="topbar">
+                <a href="Close" tabindex="-1">X</a>
+              </div>
               <div id="display"></div>
               <ul>
-                <li><a href="Escape">C</a></li>
-                <li><a href="%">%</a></li>
-                <li><a href="/">/</a></li>
-                <li><a href="*">*</a></li>
-                <li><a href="7">7</a></li>
-                <li><a href="8">8</a></li>
-                <li><a href="9">9</a></li>
-                <li><a href="-">-</a></li>
-                <li><a href="4">4</a></li>
-                <li><a href="5">5</a></li>
-                <li><a href="6">6</a></li>
-                <li><a href="+">+</a></li>
-                <li><a href="1">1</a></li>
-                <li><a href="2">2</a></li>
-                <li><a href="3">3</a></li>
-                <li><a href="Enter" class="equal">=</a></li>
-                <li><a href="0" class="zero">0</a></li>
-                <li><a href="." class="dot">.</a></li>
+                <li><a href="Escape" tabindex="-1">C</a></li>
+                <li><a href="%" tabindex="-1">%</a></li>
+                <li><a href="/" tabindex="-1">/</a></li>
+                <li><a href="*" tabindex="-1">*</a></li>
+                <li><a href="7" tabindex="-1">7</a></li>
+                <li><a href="8" tabindex="-1">8</a></li>
+                <li><a href="9" tabindex="-1">9</a></li>
+                <li><a href="-" tabindex="-1">-</a></li>
+                <li><a href="4" tabindex="-1">4</a></li>
+                <li><a href="5" tabindex="-1">5</a></li>
+                <li><a href="6" tabindex="-1">6</a></li>
+                <li><a href="+" tabindex="-1">+</a></li>
+                <li><a href="1" tabindex="-1">1</a></li>
+                <li><a href="2" tabindex="-1">2</a></li>
+                <li><a href="3" tabindex="-1">3</a></li>
+                <li><a href="Enter" class="equal" tabindex="-1">=</a></li>
+                <li><a href="0" class="zero" tabindex="-1">0</a></li>
+                <li><a href="." class="dot" tabindex="-1">.</a></li>
               </ul>
             </div>`;
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Options
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         options.modal     = (options.modal === true) ? true : false;
         options.draggable = (options.draggable === false) ? false : true;
@@ -147,8 +150,7 @@ function scalc(options = {}) {
                         };
                     }
                 }
-            }();
-            $draggable.init();
+            }(); $draggable.init();
         } else {
             calculator.innerHTML = html;
             var _window = calculator.querySelector("#window");
@@ -178,6 +180,10 @@ function scalc(options = {}) {
                     function elementDrag(e) {
                         e = e || window.event;
                         e.preventDefault();
+                        var ww = window.innerWidth;
+                        var wh = window.innerHeight;
+                        var ew = elmnt.offsetWidth;
+                        var eh = elmnt.offsetHeight;
                         // calculate the new cursor position:
                         pos1 = pos3 - e.clientX;
                         pos2 = pos4 - e.clientY;
@@ -186,6 +192,18 @@ function scalc(options = {}) {
                         // set the element's new position:
                         elmnt.style.top  = (elmnt.offsetTop  - pos2) + "px";
                         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                        if (elmnt.offsetLeft - pos1 >= ww - ew) {
+                            elmnt.style.left = ww-ew + "px";
+                        }
+                        if (elmnt.offsetTop - pos2 >= wh - eh) {
+                            elmnt.style.top = wh-eh + "px";
+                        }
+                        if (elmnt.offsetTop - pos2 <= 0 || eh >= wh) {
+                            elmnt.style.top = "0";
+                        }
+                        if (elmnt.offsetLeft - pos1 <= 0 || ew >= ww) {
+                            elmnt.style.left = "0";
+                        }
                     }
                     function closeDragElement() {
                         removeClass(topbar, "cursor-move");
@@ -196,9 +214,9 @@ function scalc(options = {}) {
             }
         }
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Add/Remove Classes
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var css_class = "button-pressed";
         var hasClass  = function (el, className) {
@@ -225,25 +243,25 @@ function scalc(options = {}) {
             }
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Calculation memory and display screen
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var display = calculator.querySelector("#display");
         var memory  = "";
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Clean the screen
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var reset = function () {
             memory = "";
             display.innerHTML = "";
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Insert a character on the screen
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var insert = function (char) {
             if (char === "/") {
@@ -254,26 +272,26 @@ function scalc(options = {}) {
             memory += char;
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Triggers the operation
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var total = function () {
             memory = eval(memory) || 0;
             display.innerHTML = memory || "";
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Selects the button specified by the "href" attribute
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var button = function (key) {
             return calculator.querySelector('a[href="' + key + '"]');
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Document events
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var load    = new Event("load"),
             _window = calculator.querySelector("#window");
@@ -290,9 +308,9 @@ function scalc(options = {}) {
             addClass(this, "disable");
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Mouse events
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var tag = calculator.getElementsByTagName("a");
         for (var i=0; i < tag.length; i++) {
@@ -327,9 +345,9 @@ function scalc(options = {}) {
             _window.focus();
         };
         /*
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         | Keyboard events
-        | ---------------------------------------------------------------------
+        | ----------------------------------------------------------------------
         */
         var $key = function (e) {
             if (e.key) {
@@ -370,7 +388,7 @@ function scalc(options = {}) {
                 display.innerHTML = char;
                 memory = char;
             }
-        }
+        };
     };
     try {
         init();
