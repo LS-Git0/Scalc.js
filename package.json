@@ -1,7 +1,7 @@
 {
   "name": "scalc.js",
   "version": "1.0.2",
-  "description": "Basic calculator to put on your application or your website.",
+  "description": "Basic operations calculator for e-commerce or web applications.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
