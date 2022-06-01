@@ -1,8 +1,8 @@
 /**
  * Scalc.js - Basic calculator
  *
- * @author     Renexo
- * @copyright  2021 Renexo
+ * @author     LS
+ * @copyright  2022 LS
  * @license    MIT License
  */
 /*
